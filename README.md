@@ -1,4 +1,4 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://vuejsdevelopers.com/images/posts/vue_laravel_crud.png" width="300"></a></p>
+<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://warlord0blog.files.wordpress.com/2018/03/vue-laravel.png" width="300"></a></p>
 
 #### Features of the site we are going to develop are
 1. Complete SPA admin panel 
