@@ -16,26 +16,30 @@
             <table class="_table">
               <tr>
                 <th>ID</th>
-                <th>Tag name</th>
+                <th>Icon image</th>
+                <th>Category name</th>
                 <th>Created at</th>
                 <th>Action</th>
               </tr>
-              <tr v-for="(tag, i) in tags" :key="i" v-if="tags.length">
-                <td>{{ tag.id }}</td>
-                <td class="_table_name">{{ tag.tagName }}</td>
-                <td>{{ tag.created_at }}</td>
+              <tr v-for="(category, i) in categories" :key="i" v-if="categories.length">
+                <td>{{ category.id }}</td>
+                <td class="table_image">
+                  <img :src="category.iconImage" alt="">
+                </td>
+                <td class="_table_name">{{ category.categoryName }}</td>
+                <td>{{ category.created_at }}</td>
                 <td>
                   <Button
                     type="info"
                     size="small"
-                    @click="showEditModal(tag, i)"
+                    @click="showEditModal(category, i)"
                     >Edit</Button
                   >
                   <Button
                     type="error"
                     size="small"
-                    @click="showDeletingModal(tag, i)"
-                    :loading="tag.isDeleting"
+                    @click="showDeletingModal(category, i)"
+                    :loading="category.isDeleting"
                   >
                     Delete
                   </Button>
@@ -52,7 +56,10 @@
           :mask-closable="false"
           :closable="false"
         >
-          <Input v-model="data.tagName" placeholder="Add category name..." />
+          <Input
+            v-model="data.categoryName"
+            placeholder="Add category name..."
+          />
 
           <div class="space"></div>
 
@@ -93,10 +100,10 @@
             <Button type="default" @click="closeAddModal">Close</Button>
             <Button
               type="primary"
-              @click="addTag"
+              @click="addCategory"
               :disabled="isAdding"
               :loading="isAdding"
-              >{{ isAdding ? "Adding.." : "Add Tag" }}</Button
+              >{{ isAdding ? "Adding.." : "Add Category" }}</Button
             >
           </div>
         </Modal>
@@ -163,7 +170,7 @@ export default {
       },
       addModal: false,
       isAdding: false,
-      tags: [],
+      categories: [],
       editData: {
         iconImage: "",
         categoryName: "",
@@ -184,18 +191,27 @@ export default {
     closeEditModal() {
       this.editModal = false;
     },
-    async addTag() {
-      if (this.data.tagName.trim() == "") return this.e("Tag name is required");
-      const res = await this.callApi("post", "app/create_tag", this.data);
+    async addCategory() {
+      if (this.data.categoryName.trim() == "")
+        return this.e("Category name is required");
+      if (this.data.iconImage.trim() == "")
+        return this.e("Icon image is required");
+      this.data.iconImage = `/uploads/${this.data.iconImage}`;
+      const res = await this.callApi("post", "app/create_category", this.data);
       if (res.status === 201) {
-        this.tags.unshift(res.data);
-        this.s("Tag has been added successfully!");
+        this.categories.unshift(res.data);
+        this.s("Category has been added successfully!");
         this.addModal = false;
-        this.data.tagName = "";
+        this.data.categoryName = "";
+        this.data.iconImage = "";
       } else {
         if (res.status === 422) {
-          if (res.data.errors.tagName) {
-            this.e(res.data.errors.tagName);
+          if (res.data.errors.categoryName) {
+            this.e(res.data.errors.categoryName[0]);
+          }
+
+          if (res.data.errors.iconImage) {
+            this.e(res.data.errors.iconImage[0]);
           }
         } else {
           this.swr();
@@ -277,7 +293,7 @@ export default {
       let image = this.data.iconImage;
       this.data.iconImage = "";
       this.$refs.uploads.clearFiles();
-      
+
       const res = await this.callApi("post", "app/delete_image", {
         imageName: image,
       });
@@ -290,8 +306,8 @@ export default {
   },
   async created() {
     this.token = window.laravel.csrfToken;
-    const res = await this.callApi("get", "app/get_tags");
-    if (res.status === 200) this.tags = res.data;
+    const res = await this.callApi("get", "app/get_category");
+    if (res.status === 200) this.categories = res.data;
     else this.swr();
   },
 };

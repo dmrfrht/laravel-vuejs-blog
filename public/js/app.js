@@ -2083,6 +2083,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2092,7 +2099,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       },
       addModal: false,
       isAdding: false,
-      tags: [],
+      categories: [],
       editData: {
         iconImage: "",
         categoryName: ""
@@ -2113,7 +2120,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     closeEditModal: function closeEditModal() {
       this.editModal = false;
     },
-    addTag: function addTag() {
+    addCategory: function addCategory() {
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
@@ -2122,38 +2129,52 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                if (!(_this.data.tagName.trim() == "")) {
+                if (!(_this.data.categoryName.trim() == "")) {
                   _context.next = 2;
                   break;
                 }
 
-                return _context.abrupt("return", _this.e("Tag name is required"));
+                return _context.abrupt("return", _this.e("Category name is required"));
 
               case 2:
-                _context.next = 4;
-                return _this.callApi("post", "app/create_tag", _this.data);
+                if (!(_this.data.iconImage.trim() == "")) {
+                  _context.next = 4;
+                  break;
+                }
+
+                return _context.abrupt("return", _this.e("Icon image is required"));
 
               case 4:
+                _this.data.iconImage = "/uploads/".concat(_this.data.iconImage);
+                _context.next = 7;
+                return _this.callApi("post", "app/create_category", _this.data);
+
+              case 7:
                 res = _context.sent;
 
                 if (res.status === 201) {
-                  _this.tags.unshift(res.data);
+                  _this.categories.unshift(res.data);
 
-                  _this.s("Tag has been added successfully!");
+                  _this.s("Category has been added successfully!");
 
                   _this.addModal = false;
-                  _this.data.tagName = "";
+                  _this.data.categoryName = "";
+                  _this.data.iconImage = "";
                 } else {
                   if (res.status === 422) {
-                    if (res.data.errors.tagName) {
-                      _this.e(res.data.errors.tagName);
+                    if (res.data.errors.categoryName) {
+                      _this.e(res.data.errors.categoryName[0]);
+                    }
+
+                    if (res.data.errors.iconImage) {
+                      _this.e(res.data.errors.iconImage[0]);
                     }
                   } else {
                     _this.swr();
                   }
                 }
 
-              case 6:
+              case 9:
               case "end":
                 return _context.stop();
             }
@@ -2326,11 +2347,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             case 0:
               _this5.token = window.laravel.csrfToken;
               _context5.next = 3;
-              return _this5.callApi("get", "app/get_tags");
+              return _this5.callApi("get", "app/get_category");
 
             case 3:
               res = _context5.sent;
-              if (res.status === 200) _this5.tags = res.data;else _this5.swr();
+              if (res.status === 200) _this5.categories = res.data;else _this5.swr();
 
             case 5:
             case "end":
@@ -2541,7 +2562,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 } else {
                   if (res.status === 422) {
                     if (res.data.errors.tagName) {
-                      _this.e(res.data.errors.tagName);
+                      _this.e(res.data.errors.tagName[0]);
                     }
                   } else {
                     _this.swr();
@@ -67906,16 +67927,22 @@ var render = function() {
                   [
                     _vm._m(0),
                     _vm._v(" "),
-                    _vm._l(_vm.tags, function(tag, i) {
-                      return _vm.tags.length
+                    _vm._l(_vm.categories, function(category, i) {
+                      return _vm.categories.length
                         ? _c("tr", { key: i }, [
-                            _c("td", [_vm._v(_vm._s(tag.id))]),
+                            _c("td", [_vm._v(_vm._s(category.id))]),
                             _vm._v(" "),
-                            _c("td", { staticClass: "_table_name" }, [
-                              _vm._v(_vm._s(tag.tagName))
+                            _c("td", { staticClass: "table_image" }, [
+                              _c("img", {
+                                attrs: { src: category.iconImage, alt: "" }
+                              })
                             ]),
                             _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(tag.created_at))]),
+                            _c("td", { staticClass: "_table_name" }, [
+                              _vm._v(_vm._s(category.categoryName))
+                            ]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(category.created_at))]),
                             _vm._v(" "),
                             _c(
                               "td",
@@ -67926,7 +67953,7 @@ var render = function() {
                                     attrs: { type: "info", size: "small" },
                                     on: {
                                       click: function($event) {
-                                        return _vm.showEditModal(tag, i)
+                                        return _vm.showEditModal(category, i)
                                       }
                                     }
                                   },
@@ -67939,11 +67966,14 @@ var render = function() {
                                     attrs: {
                                       type: "error",
                                       size: "small",
-                                      loading: tag.isDeleting
+                                      loading: category.isDeleting
                                     },
                                     on: {
                                       click: function($event) {
-                                        return _vm.showDeletingModal(tag, i)
+                                        return _vm.showDeletingModal(
+                                          category,
+                                          i
+                                        )
                                       }
                                     }
                                   },
@@ -67986,11 +68016,11 @@ var render = function() {
               _c("Input", {
                 attrs: { placeholder: "Add category name..." },
                 model: {
-                  value: _vm.data.tagName,
+                  value: _vm.data.categoryName,
                   callback: function($$v) {
-                    _vm.$set(_vm.data, "tagName", $$v)
+                    _vm.$set(_vm.data, "categoryName", $$v)
                   },
-                  expression: "data.tagName"
+                  expression: "data.categoryName"
                 }
               }),
               _vm._v(" "),
@@ -68073,9 +68103,9 @@ var render = function() {
                         disabled: _vm.isAdding,
                         loading: _vm.isAdding
                       },
-                      on: { click: _vm.addTag }
+                      on: { click: _vm.addCategory }
                     },
-                    [_vm._v(_vm._s(_vm.isAdding ? "Adding.." : "Add Tag"))]
+                    [_vm._v(_vm._s(_vm.isAdding ? "Adding.." : "Add Category"))]
                   )
                 ],
                 1
@@ -68213,7 +68243,9 @@ var staticRenderFns = [
     return _c("tr", [
       _c("th", [_vm._v("ID")]),
       _vm._v(" "),
-      _c("th", [_vm._v("Tag name")]),
+      _c("th", [_vm._v("Icon image")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Category name")]),
       _vm._v(" "),
       _c("th", [_vm._v("Created at")]),
       _vm._v(" "),

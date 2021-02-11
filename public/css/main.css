@@ -3696,3 +3696,7 @@ i.cross_icon {
 .space {
     margin: 10px 0px;
 }
+
+.table_image img {
+    width: 40px;;
+}
