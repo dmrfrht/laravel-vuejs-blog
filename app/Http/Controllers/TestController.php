@@ -6,10 +6,10 @@ use Illuminate\Http\Request;
 
 class TestController extends Controller
 {
-  public function controllerMethod()
+  public function test(Request $request)
   {
     return response()->json([
-      'message' => 'We should only json'
-    ]);
+      'message' => 'some error message'
+    ], 422);
   }
 }
