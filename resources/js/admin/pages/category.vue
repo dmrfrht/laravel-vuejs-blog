@@ -58,7 +58,16 @@
 
           <Upload
             type="drag"
-            :headers="{ 'x-csrf-token': token }"
+            :headers="{
+              'x-csrf-token': token,
+              'x-Requested-With': 'XMLHttpRequest',
+            }"
+            :format="['jpg', 'jpeg', 'png']"
+            :on-success="handleSuccess"
+            :on-error="handleError"
+            :on-format-error="handleFormatError"
+            :max-size="2048"
+            :on-exceeded-size="handleMaxSize"
             action="/app/upload"
           >
             <div style="padding: 20px 0">
@@ -70,6 +79,10 @@
               <p>Click or drag files here to upload</p>
             </div>
           </Upload>
+
+          <div class="image_thumb" v-if="data.iconImage">
+            <img :src="`/uploads/${data.iconImage}`" />
+          </div>
 
           <div slot="footer">
             <Button type="default" @click="closeAddModal">Close</Button>
@@ -140,13 +153,15 @@ export default {
   data() {
     return {
       data: {
-        tagName: "",
+        iconImage: "",
+        categoryName: "",
       },
       addModal: false,
       isAdding: false,
       tags: [],
       editData: {
-        tagName: "",
+        iconImage: "",
+        categoryName: "",
       },
       editModal: false,
       index: -1,
@@ -226,6 +241,32 @@ export default {
       }
       this.isDeleting = false;
       this.showDeleteModal = false;
+    },
+    handleSuccess(res, file) {
+      this.data.iconImage = res;
+    },
+    handleError(res, file) {
+      this.$Notice.warning({
+        title: "The file format is incorrect",
+        desc: `${
+          file.errors.file.length ? file.errors.file[0] : "Someting went wrong!"
+        }`,
+      });
+    },
+    handleFormatError(file) {
+      this.$Notice.warning({
+        title: "The file format is incorrect",
+        desc:
+          "File format of " +
+          file.name +
+          " is incorrect, please select jpg or png.",
+      });
+    },
+    handleMaxSize(file) {
+      this.$Notice.warning({
+        title: "Exceeding file size limit",
+        desc: "File  " + file.name + " is too large, no more than 2M.",
+      });
     },
   },
   async created() {
