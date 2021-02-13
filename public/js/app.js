@@ -2905,9 +2905,7 @@ __webpack_require__.r(__webpack_exports__);
     "component-c": _comC__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   data: function data() {
-    return {
-      counter: 1000
-    };
+    return {};
   },
   methods: {
     changeCounter: function changeCounter() {

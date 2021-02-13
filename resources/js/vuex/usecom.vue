@@ -3,7 +3,7 @@
     <div class="content">
       <div class="container-fluid">
         <h1>i will show how all other components react to changes</h1>
-        <h2>THE MASTER COMPONENT : {{ $store.state.counter }}</h2>
+        <h2>THE MASTER COMPONENT : {{ $this.state.counter }}</h2>
 
         <br />
         <hr />
@@ -29,6 +29,7 @@
 import comA from "./comA";
 import comB from "./comB";
 import comC from "./comC";
+import { mapGetters, mapActions } from "vuex";
 
 export default {
   components: {
@@ -36,14 +37,19 @@ export default {
     "component-b": comB,
     "component-c": comC,
   },
+  computed: {
+    ...mapGetters({
+      counter: "getCounter",
+    }),
+  },
   data() {
-    return {
-      counter: 1000,
-    };
+    return {};
   },
   methods: {
+    ...mapActions(["changeCounterAction"]),
     changeCounter() {
-      this.$store.commit("changeTheCounter", 1);
+      this.$store.dispatch("changeCounterAction", 1);
+      // this.$store.commit("changeTheCounter", 1);
     },
   },
 };
