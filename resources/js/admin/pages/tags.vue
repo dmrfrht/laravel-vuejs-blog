@@ -88,7 +88,7 @@
         </Modal>
 
         <!-- deleting modal -->
-        <Modal
+        <!-- <Modal
           v-model="showDeleteModal"
           width="360"
           :mask-closable="false"
@@ -112,13 +112,17 @@
               >Delete</Button
             >
           </div>
-        </Modal>
+        </Modal> -->
+        <deleteModal></deleteModal>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+import deleteModal from "../../admin/components/deleteModal";
+
 export default {
   data() {
     return {
@@ -193,9 +197,18 @@ export default {
       }
     },
     showDeletingModal(tag, index) {
-      this.deleteItem = tag;
-      this.deletingIndex = index;
-      this.showDeleteModal = true;
+      const deleteModalObj = {
+        showDeleteModal: true,
+        deleteUrl: "app/delete_tag",
+        data: tag,
+        deletingIndex: index,
+        isDeleted: false,
+      };
+      this.$store.commit("setDeletingModalObj", deleteModalObj);
+      console.log("delete metot");
+      // this.deleteItem = tag;
+      // this.deletingIndex = index;
+      // this.showDeleteModal = true;
     },
     async deleteTag() {
       this.isDeleting = true;
@@ -214,6 +227,18 @@ export default {
     const res = await this.callApi("get", "app/get_tags");
     if (res.status === 200) this.tags = res.data;
     else this.swr();
+  },
+  components: {
+    deleteModal,
+  },
+  computed: {
+    ...mapGetters(["getDeleteModalObj"]),
+  },
+  watch: {
+    getDeleteModalObj(obj) {
+      if (obj.isDeleted) 
+        this.tags.splice(obj.deletingIndex, 1);
+    },
   },
 };
 </script>

@@ -1911,6 +1911,108 @@ module.exports = {
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/admin/components/deleteModal.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/admin/components/deleteModal.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      isDeleting: false
+    };
+  },
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])(["getDeleteModalObj"])),
+  methods: {
+    deleteCategory: function deleteCategory() {
+      var _this = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        var res;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _this.isDeleting = true;
+                _context.next = 3;
+                return _this.callApi("post", _this.getDeleteModalObj.deleteUrl, _this.getDeleteModalObj.data);
+
+              case 3:
+                res = _context.sent;
+
+                if (res.status === 200) {
+                  _this.s("Category has been deleted successfuly");
+
+                  _this.$store.commit("setDeleteModal", true);
+                } else {
+                  _this.swr();
+
+                  _this.$store.commit("setDeleteModal", false);
+                }
+
+              case 5:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/admin/pages/category.vue?vue&type=script&lang=js&":
 /*!********************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/admin/pages/category.vue?vue&type=script&lang=js& ***!
@@ -1922,6 +2024,7 @@ module.exports = {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _admin_components_deleteModal__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../admin/components/deleteModal */ "./resources/js/admin/components/deleteModal.vue");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -2133,6 +2236,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2294,9 +2400,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }))();
     },
     showDeletingModal: function showDeletingModal(tag, index) {
-      this.deleteItem = tag;
-      this.deletingIndex = index;
-      this.showDeleteModal = true;
+      var deleteModalObj = {
+        showDeleteModal: true,
+        deleteUrl: "app/delete_tag",
+        data: tag,
+        deletingIndex: index,
+        isDeleted: false
+      }; // this.deleteItem = tag;
+      // this.deletingIndex = index;
+      // this.showDeleteModal = true;
     },
     deleteTag: function deleteTag() {
       var _this3 = this;
@@ -2437,6 +2549,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }
       }, _callee5);
     }))();
+  },
+  components: {
+    deleteModal: _admin_components_deleteModal__WEBPACK_IMPORTED_MODULE_1__["default"]
   }
 });
 
@@ -2453,7 +2568,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _admin_components_deleteModal__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../admin/components/deleteModal */ "./resources/js/admin/components/deleteModal.vue");
 
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
@@ -2579,6 +2702,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2711,9 +2837,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }))();
     },
     showDeletingModal: function showDeletingModal(tag, index) {
-      this.deleteItem = tag;
-      this.deletingIndex = index;
-      this.showDeleteModal = true;
+      var deleteModalObj = {
+        showDeleteModal: true,
+        deleteUrl: "app/delete_tag",
+        data: tag,
+        deletingIndex: index,
+        isDeleted: false
+      };
+      this.$store.commit("setDeletingModalObj", deleteModalObj);
+      console.log("delete metot"); // this.deleteItem = tag;
+      // this.deletingIndex = index;
+      // this.showDeleteModal = true;
     },
     deleteTag: function deleteTag() {
       var _this3 = this;
@@ -2774,6 +2908,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }
       }, _callee4);
     }))();
+  },
+  components: {
+    deleteModal: _admin_components_deleteModal__WEBPACK_IMPORTED_MODULE_2__["default"]
+  },
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])(["getDeleteModalObj"])),
+  watch: {
+    getDeleteModalObj: function getDeleteModalObj(obj) {
+      if (obj.isDeleted) this.tags.splice(obj.deletingIndex, 1);
+    }
   }
 });
 
@@ -2868,6 +3011,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _comA__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./comA */ "./resources/js/vuex/comA.vue");
 /* harmony import */ var _comB__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./comB */ "./resources/js/vuex/comB.vue");
 /* harmony import */ var _comC__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./comC */ "./resources/js/vuex/comC.vue");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -2895,21 +3045,37 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      localVar: "some data"
+    };
+  },
   components: {
     "component-a": _comA__WEBPACK_IMPORTED_MODULE_0__["default"],
     "component-b": _comB__WEBPACK_IMPORTED_MODULE_1__["default"],
     "component-c": _comC__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
-  data: function data() {
-    return {};
-  },
-  methods: {
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_3__["mapGetters"])({
+    counter: "getCounter"
+  })),
+  methods: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_3__["mapActions"])(["changeCounterAction"])), {}, {
     changeCounter: function changeCounter() {
-      this.$store.commit("changeTheCounter", 1);
+      this.$store.dispatch("changeCounterAction", 1); // this.$store.commit("changeTheCounter", 1);
+    },
+    runSometingWhenCounterChange: function runSometingWhenCounterChange() {
+      console.log("i am runining based on each changes");
+    }
+  }),
+  watch: {
+    counter: function counter(value) {
+      console.log("counter is changing", value);
+      this.runSometingWhenCounterChange();
+      console.logt("local var", this.localVar);
     }
   }
 });
@@ -67894,6 +68060,88 @@ if(false) {}
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/admin/components/deleteModal.vue?vue&type=template&id=468a3c07&":
+/*!********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/admin/components/deleteModal.vue?vue&type=template&id=468a3c07& ***!
+  \********************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c(
+        "Modal",
+        {
+          attrs: {
+            value: _vm.getDeleteModalObj.showDeleteModal,
+            width: "360",
+            "mask-closable": false,
+            closable: false
+          }
+        },
+        [
+          _c(
+            "p",
+            {
+              staticStyle: { color: "#f60", "text-align": "center" },
+              attrs: { slot: "header" },
+              slot: "header"
+            },
+            [
+              _c("Icon", { attrs: { type: "ios-information-circle" } }),
+              _vm._v(" "),
+              _c("span", [_vm._v("Delete confirmation")])
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c("div", { staticStyle: { "text-align": "center" } }, [
+            _c("p", [_vm._v("Are you sure you want to delete tag?")])
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            { attrs: { slot: "footer" }, slot: "footer" },
+            [
+              _c(
+                "Button",
+                {
+                  attrs: {
+                    type: "error",
+                    size: "large",
+                    long: "",
+                    loading: _vm.isDeleting,
+                    disabled: _vm.isDeleting
+                  },
+                  on: { click: _vm.deleteCategory }
+                },
+                [_vm._v("Delete")]
+              )
+            ],
+            1
+          )
+        ]
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/admin/pages/category.vue?vue&type=template&id=525752b2&scoped=true&":
 /*!************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/admin/pages/category.vue?vue&type=template&id=525752b2&scoped=true& ***!
@@ -68270,61 +68518,7 @@ var render = function() {
             1
           ),
           _vm._v(" "),
-          _c(
-            "Modal",
-            {
-              attrs: { width: "360", "mask-closable": false, closable: false },
-              model: {
-                value: _vm.showDeleteModal,
-                callback: function($$v) {
-                  _vm.showDeleteModal = $$v
-                },
-                expression: "showDeleteModal"
-              }
-            },
-            [
-              _c(
-                "p",
-                {
-                  staticStyle: { color: "#f60", "text-align": "center" },
-                  attrs: { slot: "header" },
-                  slot: "header"
-                },
-                [
-                  _c("Icon", { attrs: { type: "ios-information-circle" } }),
-                  _vm._v(" "),
-                  _c("span", [_vm._v("Delete confirmation")])
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c("div", { staticStyle: { "text-align": "center" } }, [
-                _c("p", [_vm._v("Are you sure you want to delete tag?")])
-              ]),
-              _vm._v(" "),
-              _c(
-                "div",
-                { attrs: { slot: "footer" }, slot: "footer" },
-                [
-                  _c(
-                    "Button",
-                    {
-                      attrs: {
-                        type: "error",
-                        size: "large",
-                        long: "",
-                        loading: _vm.isDeleting,
-                        disabled: _vm.isDeleting
-                      },
-                      on: { click: _vm.deleteTag }
-                    },
-                    [_vm._v("Delete")]
-                  )
-                ],
-                1
-              )
-            ]
-          )
+          _c("deleteModal")
         ],
         1
       )
@@ -68594,61 +68788,7 @@ var render = function() {
             1
           ),
           _vm._v(" "),
-          _c(
-            "Modal",
-            {
-              attrs: { width: "360", "mask-closable": false, closable: false },
-              model: {
-                value: _vm.showDeleteModal,
-                callback: function($$v) {
-                  _vm.showDeleteModal = $$v
-                },
-                expression: "showDeleteModal"
-              }
-            },
-            [
-              _c(
-                "p",
-                {
-                  staticStyle: { color: "#f60", "text-align": "center" },
-                  attrs: { slot: "header" },
-                  slot: "header"
-                },
-                [
-                  _c("Icon", { attrs: { type: "ios-information-circle" } }),
-                  _vm._v(" "),
-                  _c("span", [_vm._v("Delete confirmation")])
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c("div", { staticStyle: { "text-align": "center" } }, [
-                _c("p", [_vm._v("Are you sure you want to delete tag?")])
-              ]),
-              _vm._v(" "),
-              _c(
-                "div",
-                { attrs: { slot: "footer" }, slot: "footer" },
-                [
-                  _c(
-                    "Button",
-                    {
-                      attrs: {
-                        type: "error",
-                        size: "large",
-                        long: "",
-                        loading: _vm.isDeleting,
-                        disabled: _vm.isDeleting
-                      },
-                      on: { click: _vm.deleteTag }
-                    },
-                    [_vm._v("Delete")]
-                  )
-                ],
-                1
-              )
-            ]
-          )
+          _c("deleteModal")
         ],
         1
       )
@@ -69428,9 +69568,7 @@ var render = function() {
             _vm._v("i will show how all other components react to changes")
           ]),
           _vm._v(" "),
-          _c("h2", [
-            _vm._v("THE MASTER COMPONENT : " + _vm._s(_vm.$store.state.counter))
-          ]),
+          _c("h2", [_vm._v("THE MASTER COMPONENT : " + _vm._s(_vm.counter))]),
           _vm._v(" "),
           _c("br"),
           _vm._v(" "),
@@ -86050,6 +86188,75 @@ module.exports = function(module) {
 
 /***/ }),
 
+/***/ "./resources/js/admin/components/deleteModal.vue":
+/*!*******************************************************!*\
+  !*** ./resources/js/admin/components/deleteModal.vue ***!
+  \*******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _deleteModal_vue_vue_type_template_id_468a3c07___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./deleteModal.vue?vue&type=template&id=468a3c07& */ "./resources/js/admin/components/deleteModal.vue?vue&type=template&id=468a3c07&");
+/* harmony import */ var _deleteModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./deleteModal.vue?vue&type=script&lang=js& */ "./resources/js/admin/components/deleteModal.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _deleteModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _deleteModal_vue_vue_type_template_id_468a3c07___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _deleteModal_vue_vue_type_template_id_468a3c07___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/admin/components/deleteModal.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/admin/components/deleteModal.vue?vue&type=script&lang=js&":
+/*!********************************************************************************!*\
+  !*** ./resources/js/admin/components/deleteModal.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_deleteModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./deleteModal.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/admin/components/deleteModal.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_deleteModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/admin/components/deleteModal.vue?vue&type=template&id=468a3c07&":
+/*!**************************************************************************************!*\
+  !*** ./resources/js/admin/components/deleteModal.vue?vue&type=template&id=468a3c07& ***!
+  \**************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_deleteModal_vue_vue_type_template_id_468a3c07___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./deleteModal.vue?vue&type=template&id=468a3c07& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/admin/components/deleteModal.vue?vue&type=template&id=468a3c07&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_deleteModal_vue_vue_type_template_id_468a3c07___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_deleteModal_vue_vue_type_template_id_468a3c07___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/admin/pages/category.vue":
 /*!***********************************************!*\
   !*** ./resources/js/admin/pages/category.vue ***!
@@ -86554,13 +86761,35 @@ __webpack_require__.r(__webpack_exports__);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__["default"]);
 /* harmony default export */ __webpack_exports__["default"] = (new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
   state: {
-    counter: 1000
+    deleteModalObj: {
+      showDeleteModal: false,
+      deleteUrl: "app/delete_tag",
+      data: null,
+      deletingIndex: -1,
+      isDeleted: false
+    }
+  },
+  getters: {
+    getDeleteModalObj: function getDeleteModalObj(state) {
+      return state.deleteModalObj;
+    }
   },
   mutations: {
-    changeTheCounter: function changeTheCounter(state, payload) {
-      state.counter += payload;
+    setDeleteModal: function setDeleteModal(state, payload) {
+      var deleteModalObj = {
+        showDeleteModal: false,
+        deleteUrl: "",
+        data: null,
+        deletingIndex: -1,
+        isDeleted: payload
+      };
+      state.deleteModalObj = deleteModalObj;
+    },
+    setDeletingModalObj: function setDeletingModalObj(state, payload) {
+      state.deleteModalObj = payload;
     }
-  }
+  },
+  actions: {}
 }));
 
 /***/ }),
