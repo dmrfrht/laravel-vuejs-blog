@@ -88,31 +88,6 @@
         </Modal>
 
         <!-- deleting modal -->
-        <!-- <Modal
-          v-model="showDeleteModal"
-          width="360"
-          :mask-closable="false"
-          :closable="false"
-        >
-          <p slot="header" style="color: #f60; text-align: center">
-            <Icon type="ios-information-circle"></Icon>
-            <span>Delete confirmation</span>
-          </p>
-          <div style="text-align: center">
-            <p>Are you sure you want to delete tag?</p>
-          </div>
-          <div slot="footer">
-            <Button
-              type="error"
-              size="large"
-              long
-              :loading="isDeleting"
-              :disabled="isDeleting"
-              @click="deleteTag"
-              >Delete</Button
-            >
-          </div>
-        </Modal> -->
         <deleteModal></deleteModal>
       </div>
     </div>
@@ -205,10 +180,6 @@ export default {
         isDeleted: false,
       };
       this.$store.commit("setDeletingModalObj", deleteModalObj);
-      console.log("delete metot");
-      // this.deleteItem = tag;
-      // this.deletingIndex = index;
-      // this.showDeleteModal = true;
     },
     async deleteTag() {
       this.isDeleting = true;

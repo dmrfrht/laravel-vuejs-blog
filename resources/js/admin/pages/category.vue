@@ -173,32 +173,6 @@
         </Modal>
 
         <!-- deleting modal -->
-        <!-- <Modal
-          v-model="showDeleteModal"
-          width="360"
-          :mask-closable="false"
-          :closable="false"
-        >
-          <p slot="header" style="color: #f60; text-align: center">
-            <Icon type="ios-information-circle"></Icon>
-            <span>Delete confirmation</span>
-          </p>
-          <div style="text-align: center">
-            <p>Are you sure you want to delete tag?</p>
-          </div>
-          <div slot="footer">
-            <Button
-              type="error"
-              size="large"
-              long
-              :loading="isDeleting"
-              :disabled="isDeleting"
-              @click="deleteTag"
-              >Delete</Button
-            >
-          </div>
-        </Modal> -->
-
         <deleteModal></deleteModal>
       </div>
     </div>
@@ -206,6 +180,7 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 import deleteModal from "../../admin/components/deleteModal";
 
 export default {
@@ -242,7 +217,7 @@ export default {
         return this.e("Category name is required");
       if (this.data.iconImage.trim() == "")
         return this.e("Icon image is required");
-      this.data.iconImage = `/uploads/${this.data.iconImage}`;
+      this.data.iconImage = `${this.data.iconImage}`;
       const res = await this.callApi("post", "app/create_category", this.data);
       if (res.status === 201) {
         this.categories.unshift(res.data);
@@ -304,30 +279,16 @@ export default {
         }
       }
     },
-    showDeletingModal(tag, index) {
+    showDeletingModal(category, index) {
       const deleteModalObj = {
         showDeleteModal: true,
-        deleteUrl: "app/delete_tag",
-        data: tag,
+        deleteUrl: "app/delete_category",
+        data: category,
         deletingIndex: index,
         isDeleted: false,
       };
 
-      // this.deleteItem = tag;
-      // this.deletingIndex = index;
-      // this.showDeleteModal = true;
-    },
-    async deleteTag() {
-      this.isDeleting = true;
-      const res = await this.callApi("post", "app/delete_tag", this.deleteItem);
-      if (res.status === 200) {
-        this.tags.splice(this.deletingIndex, 1);
-        this.s("Tag has been deleted successfuly");
-      } else {
-        this.swr();
-      }
-      this.isDeleting = false;
-      this.showDeleteModal = false;
+      this.$store.commit("setDeletingModalObj", deleteModalObj);
     },
     handleSuccess(res, file) {
       res = `/uploads/${res}`;
@@ -395,6 +356,14 @@ export default {
   },
   components: {
     deleteModal,
+  },
+  computed: {
+    ...mapGetters(["getDeleteModalObj"]),
+  },
+  watch: {
+    getDeleteModalObj(obj) {
+      if (obj.isDeleted) this.categories.splice(obj.deletingIndex, 1);
+    },
   },
 };
 </script>

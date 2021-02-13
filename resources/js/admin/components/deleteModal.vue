@@ -17,11 +17,16 @@
         <Button
           type="error"
           size="large"
-          long
           :loading="isDeleting"
           :disabled="isDeleting"
           @click="deleteCategory"
           >Delete</Button
+        >
+        <Button
+          type="default"
+          size="large"
+          @click="closeModal"
+          >Close</Button
         >
       </div>
     </Modal>
@@ -55,7 +60,11 @@ export default {
         this.swr();
         this.$store.commit("setDeleteModal", false);
       }
+      this.isDeleting = false;
     },
+    closeModal() {
+      this.$store.commit("setDeleteModal", false);
+    }
   },
 };
 </script>
